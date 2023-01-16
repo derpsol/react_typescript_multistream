@@ -1,17 +1,135 @@
-import * as React from "react";
-import Typography from "@mui/material/Typography";
+import React, { useRef, Component } from "react";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import Header from "../../components/Header";
-import { Tween, Timeline, ScrollTrigger } from "react-gsap";
+import Slider from "react-slick";
+import { Button } from "@mui/material";
+import { FaChevronLeft, FaChevronRight, FaSearch } from "react-icons/fa";
 
 export default function Home() {
+  const sliderRef = useRef<Slider | null>(null);
+  const sliderRefdown = useRef<Slider | null>(null);
+
+  const settings = {
+    pauseOnHover: false,
+    infinite: true,
+    autoplay: true,
+    speed: 500,
+    easing: 'linear',
+    autoplaySpeed: 5000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  const settingsdown = {
+    pauseOnHover: false,
+    infinite: true,
+    autoplay: true,
+    speed: 500,
+    fade: true,
+    autoplaySpeed: 5000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 3,
+  };
+
+  const datas = [
+    './images/disney.jpg',
+    './images/hbomax.jpg',
+    './images/hulu.jpg',
+    './images/netflix.jpg'
+  ];
   return (
     <React.Fragment>
-      <Container maxWidth="xl" sx={{ pt: 4, pb: 4, color: "#131313" }}>
-
-      </Container>
+      <Header />
+      <Box sx={{ backgroundColor: '#131313', pt: 4 }}>
+        <Box sx={{ position: 'relative' }}>
+          <Slider
+            ref={sliderRef}
+            {...settings}
+          >
+            {datas.map((data, index) => {
+              return (
+                <Box key={index}>
+                  <Box
+                    component='img'
+                    src={data}
+                    width='80%'
+                    sx={{
+                      mx: 'auto',
+                      borderRadius: '20px',
+                      boxShadow: '4px 2px 4px #aaa',
+                      border: '2px solid #eee',
+                    }}
+                  />
+                </Box>
+              )
+            })}
+          </Slider>
+          <Slider
+            ref={sliderRefdown}
+            {...settingsdown}
+          >
+            {datas.map((data, index) => {
+              return (
+                <Box key={index}>
+                  <Box
+                    component='img'
+                    src={data}
+                    width='70%'
+                    sx={{
+                      mx: 'auto',
+                      borderRadius: '20px',
+                      boxShadow: '4px 2px 4px #aaa',
+                      border: '2px solid #eee',
+                      mt: 4
+                    }}
+                  />
+                </Box>
+              )
+            })}
+          </Slider>
+          <Button
+            sx={{
+              color: '#aaa',
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              height: '100%'
+            }}
+            onClick={() => { sliderRef.current?.slickPrev() || sliderRefdown.current?.slickPrev() }}
+          >
+            <FaChevronLeft size='30px' />
+          </Button>
+          <Button
+            sx={{
+              color: '#aaa',
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              height: '100%',
+            }}
+            onClick={() => { sliderRef.current?.slickNext() || sliderRefdown.current?.slickNext() }}
+          >
+            <FaChevronRight size='30px' />
+          </Button>
+        </Box>
+      </Box>
     </React.Fragment>
   );
 }
