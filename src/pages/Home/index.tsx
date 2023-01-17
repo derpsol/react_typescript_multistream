@@ -11,6 +11,7 @@ export default function Home() {
 
   const settings = {
     pauseOnHover: false,
+    arrows: false,
     infinite: true,
     autoplay: true,
     speed: 500,
@@ -39,6 +40,7 @@ export default function Home() {
   const settingsdown = {
     pauseOnHover: false,
     infinite: true,
+    arrows: false,
     autoplay: true,
     speed: 500,
     fade: true,
@@ -57,7 +59,7 @@ export default function Home() {
   return (
     <React.Fragment>
       <Header />
-      <Box sx={{ backgroundColor: '#131313', pt: 4 }}>
+      <Box sx={{ backgroundColor: '#131313', pt: 4, height: '100vh' }}>
         <Box sx={{ position: 'relative' }}>
           <Slider
             ref={sliderRef}
@@ -73,8 +75,8 @@ export default function Home() {
                     sx={{
                       mx: 'auto',
                       borderRadius: '20px',
-                      boxShadow: '4px 2px 4px #aaa',
-                      border: '2px solid #eee',
+                      boxShadow: '4px 2px 4px #b190ff',
+                      border: '2px solid #b190ff',
                     }}
                   />
                 </Box>
@@ -95,9 +97,10 @@ export default function Home() {
                     sx={{
                       mx: 'auto',
                       borderRadius: '20px',
-                      boxShadow: '4px 2px 4px #aaa',
-                      border: '2px solid #eee',
-                      mt: 4
+                      boxShadow: '4px 2px 4px #b190ff',
+                      border: '2px solid #b190ff',
+                      mt: 4,
+                      mb: 4,
                     }}
                   />
                 </Box>
